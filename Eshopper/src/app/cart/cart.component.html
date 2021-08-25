@@ -1,0 +1,84 @@
+<div class="">
+	<!--template eshopper css-->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/assets/css/price-range.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+<app-navbar></app-navbar>
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+              <li><a [routerLink]="['/Dashboarda']">Aceuil </a></li>
+              <li [routerLink]="['/Cart']" >Panier</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info" *ngIf="cartLength>=1">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Article</td>
+                        <td class="description"></td>
+                        <td class="price">Prix</td>
+                        <td class="quantity">Quantitie</td>
+                        <td class="total">Totale</td>
+                        <td>Supprimer</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cart of carts">
+                        <td class="cart_product">
+                            <a ><img style="width: 140px ;height: 140px;" src="{{cart.url}}" alt=""></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="">{{cart.name}}</a></h4>
+                            <p>ID : {{cart.id}}</p>
+                            <p>{{cart.datecmd | date: 'yyyy-MM-dd hh:mm:ss'}} </p>
+                        </td>
+                        <td class="cart_price">
+                            <p>{{cart.price}} </p>
+                        </td>
+                        <td class="cart_quantity">
+                            
+                            <div class="cart_quantity_button">
+                                <input  type="number" (change)="calculateTotal()" [(ngModel)]="cart.quantity"  name="quantity" value="{{cart.quantity}}" >
+                            </div>  
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price">{{cart.price*cart.quantity}}</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="cart_quantity_delete" (click)="deleteCart(cart.id, currentUser.id)"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="row">
+        <div class="col-sm-6">
+            <div class="total_area">
+                <ul>
+                    <li>Prix Totale Panier <span>{{total}}D</span></li>
+                  <!--  <li>Eco Tax <span>3D</span></li>
+                    <li>Frais de Livraison <span>Free</span></li>
+                    <li>Totales Final <span>{{total + 3}} D</span></li>-->
+                </ul>
+                    <a class="btn btn-default check_out" [routerLink]="['/checkout']">Caisser</a>
+            </div>
+        </div> </div>
+    </div>
+</section> <!--/#cart_items-->
+
+<app-footer></app-footer>
+ <!--template eshopper js-->
+<script src="src/assets/js/jquery.js"></script>
+<script src="src/assets/js/bootstrap.min.js"></script>
+<script src="src/assets/js/jquery.scrollUp.min.js"></script>
+<script src="src/assets/js/price-range.js"></script>
+<script src="src/assets/js/jquery.prettyPhoto.js"></script>
+<script src="src/assets/js/main.js"></script> 
+</div>

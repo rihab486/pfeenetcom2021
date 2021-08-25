@@ -1,0 +1,167 @@
+<div class="">
+	<!--template eshopper css-->
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/assets/css/prettyPhoto.css" rel="stylesheet">
+  <link href="/assets/css/price-range.css" rel="stylesheet">
+  <link href="/assets/css/animate.css" rel="stylesheet">
+  <link href="/assets/css/main.css" rel="stylesheet">
+  <link href="/assets/css/responsive.css" rel="stylesheet">
+  <app-navbar></app-navbar>
+ 
+  <section>
+		<div class="container">
+			<div class="row">	
+				<div class="col-sm-9 padding-right" *ngFor="let order of productOrders let i = index">
+					<div class="product-details" ><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src={{order.product.url}} alt="" />
+								<h3>ZOOM</h3>
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+								
+								  <!-- Wrapper for slides -->
+								    <div class="carousel-inner">
+										<div class="item active">
+										  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+										</div></div>
+								  <!-- Controls -->
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+                                    <!--
+									<img src="assets/images/product-details/new.jpg" class="newarrival" alt="" />
+									-->
+								<h2>{{order.product.name}}</h2>
+								<span>
+									<span> {{order.product.price}}D</span><br>
+									<img src="assets/images/product-details/rating.png" />
+								</span>
+								<p>{{order.product.description}}</p>
+								<span>
+									
+								<div class="row" *ngIf="isLoggedIn">
+									<label>Quantitie:</label>
+									<input type="number" min="0"  [(ngModel)]="order.quantity" value="" />
+									
+									
+									<div  *ngFor="let role of currentUser.roles">
+									<div  *ngIf=" currentUser.roles.role === ! ROLE_ADMIN">
+									<button type="submit"  (click)="addToCart(order,currentUser.id)" class="btn btn-fefault cart" [disabled]="order.quantity <= 0">
+										<i class="fa fa-shopping-cart"></i>
+										Ajouter Au Panier
+									</button>
+									
+								    </div>
+								<div  *ngIf=" currentUser.roles.role === ROLE_CLIENT">
+										<button type="submit"  (click)="addToCart(order,currentUser.id)" class="btn btn-fefault cart" [disabled]="order.quantity <= 0">
+											<i class="fa fa-shopping-cart"></i>
+											Ajouter Au Panier
+										</button>
+										
+										</div>
+									
+								    </div>
+
+								 </div> 
+							      <div *ngIf="!isLoggedIn">
+									  <p><strong>S'il Vous Plait Connectez Vous Pour ajouter au Panier</strong>
+                                       <button type="button" class="btn btn-link" (click)="login()">Connexion</button></p>
+								  </div>
+								</span>
+								   <p><b>Taille</b>: {{order.product.taille}}</p>
+								   <p><b>Couleur</b>: {{order.product.couleur}}</p>
+								   <p><b>Marque</b>: {{order.product.marque}}</p>
+								   <div *ngIf="order.product.stock === true">
+									<p>	<b>Disponible:</b> In Stock  </p>
+							       </div>
+							        <div *ngIf="order.product.stock === false">
+								     <p>	<b>Disponible:</b> Not In Stock  </p>
+							        </div>
+									
+							   <a href=""><img src="assets/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+	   
+								   
+							
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+					
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#reviews" data-toggle="tab">Commentaires (5)</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">				
+							<div class="tab-pane fade" id="tag" >
+								<div class="col-sm-6">
+									<br><br>
+									<form >
+										<span>
+											<textarea placeholder="Tager Votre Ami(e)"  name="name"  ></textarea>
+										</span>
+										<b>Evaluation: </b> <img src="assets/images/product-details/rating.png" alt="" />
+										<div *ngIf="isLoggedIn">
+										<button type="button"   class="btn btn-default pull-right">
+											Envoyer
+										</button></div>
+									</form>
+									
+								</div>
+
+							</div>
+							
+							<div class="tab-pane fade active in" id="reviews" >
+								<div class="col-sm-12">
+									<div class="col-3" *ngFor="let item of comments">
+									<ul>
+										<li><a href=""><i class="fa fa-user"></i> {{item.addedBy}}</a></li>
+										<li><a href=""><i class="fa fa-clock-o"></i>{{item.addedAt |date: 'yyyy-MM-dd hh:mm:ss' }}</a></li>
+									</ul>
+									<p><b>Titre *:</b>  {{item.title }}</p>
+									<p> <b>Avis Client*:</b>{{item.message }} </p>
+									<p><b></b></p>
+									
+								   </div><br><br>
+
+									<form *ngIf="currentUser">
+										<span>
+											<input type="text" placeholder="Titre de commentaire"  name="title" [(ngModel)]="comment.title"/>
+										</span>
+										<textarea placeholder="Passer Votre Avis Cher Client" name="message" [(ngModel)]="comment.message" ></textarea>
+										<b>Évaluation : </b> <img src="assets/images/product-details/rating.png" alt="" />
+										<div *ngIf="isLoggedIn">
+										<button type="button"  (click)="addComment(idProduct, currentUser.username)" class="btn btn-default pull-right">
+											Ajouter
+										</button></div>
+									</form>
+								</div>
+							</div>
+							
+						</div>
+					</div><!--/category-tab-->
+				</div>
+			</div>
+		</div>
+	</section>
+  <app-footer></app-footer>
+<!--template eshopper js-->
+<script src="src/assets/js/jquery.js"></script>
+<script src="src/assets/js/bootstrap.min.js"></script>
+<script src="src/assets/js/jquery.scrollUp.min.js"></script>
+<script src="src/assets/js/price-range.js"></script>
+<script src="src/assets/js/jquery.prettyPhoto.js"></script>
+<script src="src/assets/js/main.js"></script>
+</div>

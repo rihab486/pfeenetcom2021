@@ -1,0 +1,153 @@
+<div class="">
+	<!--template eshopper css-->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/assets/css/price-range.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+  <app-navbar></app-navbar>
+
+  <div class="col-sm-3" style="margin-top: 15px;">
+    <div class="search_box pull-right">
+        <input type="text" name="name" [(ngModel)]="name" (click)="search()" placeholder="Rechercher"/>
+    </div>
+</div>
+  <section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                        <li data-target="#slider-carousel" data-slide-to="2"></li>
+                    </ol>
+                    
+                    <div class="carousel-inner">
+                        <div class="item active" href="ee">
+                            <div class="col-sm-6">
+                                <h1><span>E</span>-SHOPPER</h1>
+                                <h2>Plateforme E-Commerce</h2>
+                                <p>Bienvenue dans notre boutique de vente en ligne le moins chér et plus flexible..
+                                 Elle vend également des vêtements dédiés à tout le monde (homme, femme et enfant).. Vous y trouverez également des vêtements de sport  </p>
+                                <button type="button" class="btn btn-default get">obtenez le maintenant</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="assets/images/home/girl3.jpg"class="girl img-responsive" alt="" />
+                                <img src="assets/images/home/pricing.png"  class="pricing" alt="" />
+                            </div>
+                        </div>                    
+                        <div class=" item "  id="ee" >
+                            <div class="col-sm-6">
+                                <h1><span>E</span>-SHOPPER</h1>
+                                <h2>Free Ecommerce Template</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Get it now</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="assets/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                                <img src="assets/images/home/pricing.png" class="pricing" alt="" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</section><!--/slider-->
+
+
+<section>
+    <div class="container">
+        <div class="row" style="padding-bottom: 40px;" *ngIf="!showSearch">
+      <app-products></app-products> 
+      </div>
+     
+    <div class="recommended_items"  *ngFor="let order of tags;"><!--recommended_items-->
+        <h2 class="title text-center"> {{order.name}}</h2>
+        
+        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">	
+                        <div class="col-sm-3" *ngFor="let x of order.product;">
+                            <p>fffffffffffff</p>
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="{{x.url}}"/>
+                                    <h2>{{x.price}}D</h2>
+                                    <p>{{x.name}}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Ajouter Au Panier</a>
+                                </div>
+                                
+                         </div>
+                </div>
+                    
+                  
+                </div>
+                   -->
+                   
+                </div>
+               
+            </div>
+             <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>			
+        </div>
+    </div><!--/recommended_items-->
+    </div>
+    <div *ngIf="showSearch">
+        <div class="col-sm-4"  *ngFor="let order of productOrders; let i = index " >
+            <div class="product-image-wrapper" >
+                <div class="single-products"  >
+                    <div class="productinfo text-center" >   
+                     <img src="{{order.product.url}}" />
+                        <h2>{{order.product.price}}D</h2>
+                        <p>{{order.product.name}}</p>
+                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </div>
+                    <div class="product-overlay">
+                        <div class="overlay-content"  >
+                            
+                            <h2  
+                            (click)="sngleProduct(order.product.id)">
+                            {{order.product.price}}D</h2>
+                              <p >
+                              {{order.product.name}}</p>
+                            <a  class="btn btn-default add-to-cart"  ><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                    </div>
+                    
+             
+            </div>
+          </div>
+        </div>    
+        </div>
+        
+</section>
+
+
+  <app-footer></app-footer>
+  <!--template eshopper js-->
+ <script src="src/assets/js/jquery.js"></script>
+ <script src="src/assets/js/bootstrap.min.js"></script>
+ <script src="src/assets/js/jquery.scrollUp.min.js"></script>
+ <script src="src/assets/js/price-range.js"></script>
+ <script src="src/assets/js/jquery.prettyPhoto.js"></script>
+ <script src="src/assets/js/main.js"></script> 
+</div>

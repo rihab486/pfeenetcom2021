@@ -1,0 +1,9 @@
+<div class="card" style="width: 30rem;">
+    <h3 align="center" >Ajout des images couleur produit</h3>
+    <mat-progress-bar mode="buffer" *ngIf="progressBar"></mat-progress-bar>
+    <form >
+  <table class="table table-borderless">
+     <tr><td>Image</td><td><input type="file" (change)="onFileSelected($event)" class="form-control" name="url"></td></tr>
+      <tr><td>Name</td><td><input type="text" [(ngModel)]="image.name"  name="name"></td></tr>
+      <tr><td colspan="2"><button class="btn btn-primary" (click)="ajout()">Ajouter</button></td></tr>
+ </table></form></div>

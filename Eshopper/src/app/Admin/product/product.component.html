@@ -1,0 +1,24 @@
+  <div class="card-header">
+    <h3 align="center" >Gestion des produits</h3>
+    <mat-progress-bar mode="buffer" *ngIf="progressBar"></mat-progress-bar>
+
+    <form (ngSubmit) = "ajout()"> 
+  <table class="table table-borderless">
+     <tr><td>Image</td><td><input type="file"  (change)="onFileSelected($event)" class="form-control" name="url"></td></tr>
+      <tr><td>Name</td><td><input type="text" [(ngModel)]="product.name" class="form-control" name="name"></td></tr> 
+      <tr><td>description</td><td><textarea type="text" name="description" [(ngModel)]="product.description" class="form-control"></textarea></td></tr>
+      <tr><td>Prix</td><td><input type="number"  [(ngModel)]="product.price"  name="price"></td></tr>
+    <tr><td>Couleur</td><td><input type="text"  [(ngModel)]="product.couleur"  name="couleur"></td></tr>
+    <tr><td>Taille</td><td><input type="text"  [(ngModel)]="product.taille"  name="taille"></td></tr>
+    <tr><td>Marque</td><td><input type="text"  [(ngModel)]="product.marque"  name="marque"></td></tr>
+     <tr><td>STOCK</td>
+       <mat-radio-group  >
+        <mat-radio-button value="1" (click)="vall()">in Stock</mat-radio-button>
+        <mat-radio-button  value="2" (click)="vale()">not in stock</mat-radio-button>
+      </mat-radio-group></tr>
+      <tr><td colspan="2"><button class="btn btn-primary" >Ajouter</button></td></tr>
+      <tr>
+   </table></form>
+  </div>
+
+ 
